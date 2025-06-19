@@ -14,7 +14,7 @@ def row_to_model(row: tuple) -> Explorer:
     return Explorer(name=name, country=country, description=description)
 
 def model_to_dict(explorer: Explorer) -> dict:
-    return explorer.dict()
+    return explorer.model_dump()
 
 def get_one(name: str) -> Explorer:
     qry = "select * from explorer where name=:name"
@@ -29,7 +29,8 @@ def get_one(name: str) -> Explorer:
 def get_all() -> list[Explorer]:
     qry = "select * from explorer"
     curs.execute(qry)
-    return [row_to_model(row) for row in curs.fetchall()]
+    rows = list(curs.fetchall())
+    return [row_to_model(row) for row in rows]
 
 def create(explorer: Explorer) -> Explorer:
     if not explorer: return None
