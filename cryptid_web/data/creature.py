@@ -13,7 +13,7 @@ curs.execute("""create table if not exists creature(
 
 def row_to_model(row: tuple) -> Creature:
     name, description, country, area, aka = row
-    return Creature(name, description, country, area, aka)
+    return Creature(name=name, description=description, country=country, area=area, aka=aka)
 
 def model_to_dict(creature: Creature) -> dict:
     return creature.model_dump()
